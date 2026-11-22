@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Cpu, Layers, PenTool, Box } from "lucide-react";
+import catiaTurbine from "@/assets/catia 1.webp";
 
 const features = [
   {
@@ -30,7 +31,11 @@ const features = [
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-24 relative">
+    <section id="about" className="relative overflow-hidden py-24">
+      <div className="absolute inset-0">
+        <img src={catiaTurbine} alt="" className="h-full w-full object-cover object-center opacity-[0.09] sm:object-right sm:opacity-[0.14]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background sm:bg-gradient-to-r sm:from-background sm:via-background/85 sm:to-background/60" />
+      </div>
       <div className="absolute inset-0 bg-grid opacity-10" />
       <div className="container mx-auto px-4 relative z-10">
         <motion.div

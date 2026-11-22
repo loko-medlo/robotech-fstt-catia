@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
 import { ArrowDown, CalendarDays, Clock3, MapPin, ArrowUpRight } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+import catiaCar from "@/assets/catia 2.webp";
 
 const HeroSection = () => {
   return (
     <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
-        <img src={heroBg} alt="" className="h-full w-full object-cover object-[62%_center] opacity-35" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/70 to-background" />
+        <img src={catiaCar} alt="" className="h-full w-full object-cover object-[64%_center] opacity-55 sm:object-center" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/92 via-background/72 to-background sm:bg-gradient-to-r sm:from-background sm:via-background/75 sm:to-background/40" />
         <div className="absolute inset-0 bg-grid opacity-15" />
         <div className="absolute -left-24 top-1/3 h-72 w-72 rounded-full bg-primary/15 blur-[100px]" />
       </div>
