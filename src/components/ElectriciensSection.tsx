@@ -6,8 +6,8 @@ const ElectriciensSection = () => {
   return (
     <section id="electriciens" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-10" />
-      <img src={catiaMotorcycle} alt="" className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.12] sm:object-right sm:opacity-[0.2]" />
-      <div className="absolute inset-0 bg-background/70 sm:bg-gradient-to-r sm:from-background sm:via-background/90 sm:to-background/55" />
+      <img src={catiaMotorcycle} alt="" className="absolute inset-0 h-full w-full object-cover object-center opacity-35 sm:object-right sm:opacity-60" />
+      <div className="absolute inset-0 bg-background/55 sm:bg-gradient-to-r sm:from-background sm:via-background/80 sm:to-background/10" />
       {/* Accent glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-secondary/5 blur-3xl" />
 
