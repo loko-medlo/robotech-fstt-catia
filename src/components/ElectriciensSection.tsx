@@ -57,7 +57,7 @@ const ElectriciensSection = () => {
             </div>
 
             <a
-              href="#downloads"
+              href="#register"
               className="mt-8 inline-flex items-center gap-2 rounded-xl bg-secondary px-6 py-3 font-bold text-secondary-foreground transition-all hover:scale-105 glow-secondary"
             >
               <Zap className="h-5 w-5" />

@@ -7,7 +7,7 @@ import img4 from "@/assets/img4.png";
 
 const SessionStatsSection = () => {
     const stats = [
-        { icon: Users, label: "Participants inscrits", value: "85", color: "text-primary" },
+        { icon: Users, label: "Participants inscrits", value: "+100", color: "text-primary" },
         { icon: CheckCircle2, label: "Séance 1 complétée", value: "100%", color: "text-secondary" },
         { icon: Star, label: "Niveau atteint", value: "Part Design", color: "text-amber-400" },
     ];
@@ -15,9 +15,9 @@ const SessionStatsSection = () => {
     const images = [img1, img2, img3, img4];
 
     return (
-        <section id="stats" className="py-24 bg-surface relative overflow-hidden">
+        <section id="edition-2025" className="py-24 bg-surface relative overflow-hidden">
             <div className="container mx-auto px-4 relative z-10">
-                <div className="flex flex-col lg:flex-row items-center gap-16">
+                <div className="flex flex-col items-center gap-10 lg:flex-row lg:gap-16">
                     {/* Colonne Texte & Stats */}
                     <div className="w-full lg:w-1/2">
                         <motion.div
@@ -27,14 +27,13 @@ const SessionStatsSection = () => {
                             className="space-y-6"
                         >
                             <h2 className="font-heading text-3xl md:text-5xl font-bold leading-tight">
-                                Succès Record de la <span className="text-gradient-primary">Séance 1</span>
+                                Une édition 2025 qui a fait <span className="text-gradient-primary">référence</span>
                             </h2>
                             <p className="text-muted-foreground text-lg leading-relaxed">
-                                La première séance a été un véritable succès avec plus de <b>85 étudiants</b> réunis pour débuter leur aventure sur CATIA V5.
-                                Nous avons déjà maîtrisé les bases du <b>Part Design</b> et nous sommes maintenant prêts pour la <b>Séance 2</b>.
+                                L&apos;année dernière, plus de <b>100 étudiants</b> se sont réunis pour découvrir CATIA V5 et maîtriser les bases du <b>Part Design</b>. Cette dynamique nous pousse à proposer une nouvelle session encore plus structurée.
                             </p>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8">
+                            <div className="grid grid-cols-1 gap-3 pt-5 sm:grid-cols-3 sm:gap-4 sm:pt-8">
                                 {stats.map((stat, index) => (
                                     <motion.div
                                         key={index}
@@ -42,7 +41,7 @@ const SessionStatsSection = () => {
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: index * 0.1 }}
-                                        className="bg-card border border-border p-5 rounded-2xl text-center hover:scale-105 transition-transform"
+                                        className="rounded-2xl border border-border bg-card p-4 text-center transition-transform hover:scale-105 sm:p-5"
                                     >
                                         <stat.icon className={`h-6 w-6 mx-auto mb-3 ${stat.color}`} />
                                         <div className="text-2xl font-bold">{stat.value}</div>
@@ -51,10 +50,10 @@ const SessionStatsSection = () => {
                                 ))}
                             </div>
 
-                            <div className="p-6 rounded-2xl bg-primary/5 border border-primary/20 mt-8">
+                            <div className="mt-6 rounded-2xl border border-primary/20 bg-primary/5 p-5 sm:mt-8 sm:p-6">
                                 <p className="text-sm font-medium text-primary flex items-center gap-2">
                                     <Camera className="h-4 w-4" />
-                                    Retour en images sur une séance mémorable...
+                                    Archives 2025 : retour en images sur une séance mémorable.
                                 </p>
                             </div>
                         </motion.div>
@@ -62,7 +61,7 @@ const SessionStatsSection = () => {
 
                     {/* Colonne Images Grid */}
                     <div className="w-full lg:w-1/2">
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-2 gap-3 sm:gap-4">
                             {images.map((img, index) => (
                                 <motion.div
                                     key={index}
@@ -75,8 +74,8 @@ const SessionStatsSection = () => {
                                 >
                                     <img
                                         src={img}
-                                        alt={`Séance 1 - Photo ${index + 1}`}
-                                        className="w-full h-48 md:h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                                        alt={`Formation CATIA 2025 - Photo ${index + 1}`}
+                                        className="h-36 w-full object-cover transition-transform duration-500 group-hover:scale-110 sm:h-48 md:h-64"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                                 </motion.div>

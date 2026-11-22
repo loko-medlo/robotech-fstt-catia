@@ -57,7 +57,7 @@ const GallerySection = () => {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
                     {galleryItems.map((item, index) => (
                         <motion.div
                             key={item.id}
@@ -65,7 +65,7 @@ const GallerySection = () => {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className={`group relative overflow-hidden rounded-3xl border border-border bg-card h-80 ${item.colSpan}`}
+                            className={`group relative h-64 overflow-hidden rounded-3xl border border-border bg-card sm:h-80 ${item.colSpan}`}
                         >
                             {/* Background Image */}
                             <div className="absolute inset-0">
@@ -79,7 +79,7 @@ const GallerySection = () => {
                             </div>
 
                             {/* Contenu */}
-                            <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                            <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
                                 <div className="relative z-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                     <div className="flex items-center gap-2 mb-2">
                                         <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-secondary/20 backdrop-blur-md">

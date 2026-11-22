@@ -49,7 +49,7 @@ const AboutSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid gap-4 md:grid-cols-2 md:gap-6">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -57,7 +57,7 @@ const AboutSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group rounded-2xl border border-border bg-card p-8 transition-all hover:border-primary/40 hover:glow-primary"
+              className="group rounded-2xl border border-border bg-card p-5 transition-all hover:border-primary/40 hover:glow-primary sm:p-7 md:p-8"
             >
               <div className="flex items-start gap-5">
                 <div className="flex-shrink-0 rounded-xl bg-primary/10 p-3">

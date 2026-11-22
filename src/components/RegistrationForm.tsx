@@ -31,7 +31,7 @@ const formSchema = z.object({
     phone: z.string().min(10, "Le numéro doit contenir au moins 10 caractères."),
     studyLevel: z.string().min(1, "Veuillez sélectionner un niveau d'étude."),
     studyField: z.string().min(2, "Ce champ est obligatoire."),
-    status: z.enum(["membre", "externe_session1", "externe_nouveau"], {
+    status: z.enum(["membre", "non_membre"], {
         required_error: "Veuillez sélectionner votre statut.",
     }),
 });
@@ -39,7 +39,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 // The Google Apps Script Web App URL provided by the user
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyK8xLAiN4Rqy1F5_hBX_XrwDBwrAEwSqsGt2xDUo93v4xOSPYclTy9JPWeuMaqNYqn/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxtVufD5e367XFJx90jzami52AF1tpHDrDptEOHTJJkjGwTWxxXJ4vg5ghjziQ_GlBu/exec";
 
 export function RegistrationForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -55,13 +55,15 @@ export function RegistrationForm() {
             phone: "",
             studyLevel: "",
             studyField: "",
-            status: "externe_nouveau",
+            status: "non_membre",
         },
     });
 
     // Handle form submission
     const onSubmit = async (values: FormValues) => {
         setIsSubmitting(true);
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 20000);
         try {
             // Prepend a single quote to force Google Sheets to treat the phone number as text
             const submissionValues = {
@@ -74,14 +76,16 @@ export function RegistrationForm() {
                 // Using "text/plain" bypasses strict CORS preflight checks for Google Apps Script
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify(submissionValues),
+                signal: controller.signal,
             });
 
+            if (!response.ok) throw new Error(`Réponse HTTP ${response.status}`);
             const result = await response.json();
 
             if (result.result === "success") {
                 toast({
-                    title: "Inscription réussie ! 🎉",
-                    description: "Vos informations ont bien été enregistrées.",
+                    title: "Inscription enregistrée !",
+                    description: "Votre place pour la formation CATIA V5 est réservée.",
                 });
                 form.reset();
             } else {
@@ -92,18 +96,19 @@ export function RegistrationForm() {
             toast({
                 variant: "destructive",
                 title: "Erreur d'envoi",
-                description: "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.",
+                description: error instanceof DOMException && error.name === "AbortError" ? "Le délai d'envoi est dépassé. Veuillez réessayer." : "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.",
             });
         } finally {
+            window.clearTimeout(timeout);
             setIsSubmitting(false);
         }
     };
 
     return (
-        <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-lg max-w-2xl mx-auto">
+        <div className="surface-panel mx-auto max-w-2xl rounded-3xl p-5 shadow-2xl sm:p-7 md:p-9">
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
+                    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
                         <FormField
                             control={form.control}
                             name="lastName"
@@ -132,7 +137,7 @@ export function RegistrationForm() {
                         />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
                         <FormField
                             control={form.control}
                             name="email"
@@ -161,25 +166,25 @@ export function RegistrationForm() {
                         />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
                         <FormField
                             control={form.control}
                             name="studyLevel"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Niveau d'étude</FormLabel>
-                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <Select onValueChange={field.onChange} value={field.value}>
                                         <FormControl>
-                                            <SelectTrigger>
+                                            <SelectTrigger className="h-12 rounded-xl bg-background/70 px-4">
                                                 <SelectValue placeholder="Sélectionnez un niveau" />
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-                                            <SelectItem value="Bac+1">Bac+1 (Classes Prépas, L1...)</SelectItem>
-                                            <SelectItem value="Bac+2">Bac+2 (DUT, BTS, L2...)</SelectItem>
-                                            <SelectItem value="Bac+3">Bac+3 (Licence, 1ère année CI...)</SelectItem>
-                                            <SelectItem value="Bac+4">Bac+4 (Master 1, 2ème année CI...)</SelectItem>
-                                            <SelectItem value="Bac+5">Bac+5 (Master 2, 3ème année CI...)</SelectItem>
+                                            <SelectItem value="Bac+1">Bac+1</SelectItem>
+                                            <SelectItem value="Bac+2">Bac+2</SelectItem>
+                                            <SelectItem value="Bac+3">Bac+3</SelectItem>
+                                            <SelectItem value="Bac+4">Bac+4</SelectItem>
+                                            <SelectItem value="Bac+5">Bac+5</SelectItem>
                                             <SelectItem value="Autre">Autre</SelectItem>
                                         </SelectContent>
                                     </Select>
@@ -211,10 +216,10 @@ export function RegistrationForm() {
                                 <FormControl>
                                     <RadioGroup
                                         onValueChange={field.onChange}
-                                        defaultValue={field.value}
+                                        value={field.value}
                                         className="grid gap-4"
                                     >
-                                        <FormItem className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl border border-border bg-card/50 hover:bg-muted transition-all cursor-pointer group gap-2">
+                                        <FormItem className="relative flex flex-col items-start justify-between gap-3 rounded-2xl border border-border bg-card/50 p-4 transition-all hover:border-primary/40 hover:bg-muted sm:flex-row sm:items-center">
                                             <div className="flex items-center space-x-3">
                                                 <FormControl>
                                                     <RadioGroupItem value="membre" className="border-muted-foreground" />
@@ -225,39 +230,23 @@ export function RegistrationForm() {
                                             </div>
                                             <div className="flex items-center self-end sm:self-auto">
                                                 <span className="px-3 py-1 bg-muted-foreground/10 text-muted-foreground text-[10px] font-black uppercase tracking-widest rounded-lg border border-muted-foreground/20">
-                                                    Gratuit
+                                                    20 DH
                                                 </span>
                                             </div>
                                         </FormItem>
 
-                                        <FormItem className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl border border-secondary/20 bg-secondary/10 hover:bg-secondary/20 hover:border-secondary/40 transition-all cursor-pointer group gap-2">
+                                        <FormItem className="relative flex flex-col items-start justify-between gap-3 rounded-2xl border border-secondary/30 bg-secondary/10 p-4 transition-all hover:border-secondary/60 hover:bg-secondary/15 sm:flex-row sm:items-center">
                                             <div className="flex items-center space-x-3">
                                                 <FormControl>
-                                                    <RadioGroupItem value="externe_session1" className="text-secondary border-secondary/50" />
+                                                    <RadioGroupItem value="non_membre" className="text-secondary border-secondary/50" />
                                                 </FormControl>
                                                 <FormLabel className="font-bold cursor-pointer text-sm sm:text-base text-white">
-                                                    Externe (Déjà assisté Séance 1)
-                                                </FormLabel>
-                                            </div>
-                                            <div className="flex items-center self-end sm:self-auto">
-                                                <span className="px-3 py-1 bg-muted-foreground/10 text-muted-foreground text-[10px] font-black uppercase tracking-widest rounded-lg border border-muted-foreground/20">
-                                                    Gratuit
-                                                </span>
-                                            </div>
-                                        </FormItem>
-
-                                        <FormItem className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl border border-primary/20 bg-primary/10 hover:bg-primary/20 hover:border-primary/40 transition-all cursor-pointer group gap-2">
-                                            <div className="flex items-center space-x-3">
-                                                <FormControl>
-                                                    <RadioGroupItem value="externe_nouveau" className="text-primary border-primary/50" />
-                                                </FormControl>
-                                                <FormLabel className="font-bold cursor-pointer text-sm sm:text-base text-white">
-                                                    Externe (Nouveau participant)
+                                                    Non-membre du Club Robotech
                                                 </FormLabel>
                                             </div>
                                             <div className="flex items-center self-end sm:self-auto">
                                                 <span className="px-3 py-1 bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-widest rounded-lg glow-primary">
-                                                    20 DH
+                                                    30 DH
                                                 </span>
                                             </div>
                                         </FormItem>
@@ -272,7 +261,7 @@ export function RegistrationForm() {
                         <p className="text-center text-sm text-muted-foreground animate-pulse">
                             ⚠️ Veuillez vérifier vos informations avant de vous inscrire.
                         </p>
-                        <Button type="submit" className="w-full text-base py-6 glow-primary" disabled={isSubmitting}>
+                        <Button type="submit" className="h-14 w-full rounded-xl text-base font-bold glow-primary" disabled={isSubmitting}>
                             {isSubmitting ? (
                                 <>
                                     <Loader2 className="mr-2 h-5 w-5 animate-spin" />

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { BadgeCheck, CreditCard, UsersRound } from "lucide-react";
 import { RegistrationForm } from "./RegistrationForm";
 
 const RegistrationSection = () => {
@@ -16,15 +17,27 @@ const RegistrationSection = () => {
                     className="text-center mb-16"
                 >
                     <span className="inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary mb-4">
-                        Places limitées
+                        Session du 28 novembre 2026
                     </span>
                     <h2 className="font-heading text-3xl md:text-5xl font-bold mb-4">
-                        Inscription : <span className="text-gradient-primary">Séance 2</span>
+                        Votre place en <span className="text-gradient-primary">formation</span>
                     </h2>
                     <p className="max-w-2xl mx-auto text-muted-foreground text-lg">
-                        Prêt pour la suite ? Remplissez le formulaire ci-dessous pour réserver votre place à la deuxième séance de formation CATIA V5.
+                        Réservez votre participation à la formation CATIA V5. Le règlement s&apos;effectue le jour de la formation.
                     </p>
                 </motion.div>
+
+                <div className="mx-auto mb-10 grid max-w-2xl gap-3 sm:grid-cols-2">
+                    <div className="rounded-2xl border border-primary/30 bg-primary/10 p-5">
+                        <div className="mb-3 flex items-center gap-2 text-primary"><UsersRound className="h-5 w-5" /><span className="text-sm font-bold uppercase tracking-wider">Membres Robotech</span></div>
+                        <p className="font-heading text-3xl font-black">20 DH</p>
+                    </div>
+                    <div className="rounded-2xl border border-secondary/30 bg-secondary/10 p-5">
+                        <div className="mb-3 flex items-center gap-2 text-secondary"><CreditCard className="h-5 w-5" /><span className="text-sm font-bold uppercase tracking-wider">Non-membres</span></div>
+                        <p className="font-heading text-3xl font-black">30 DH</p>
+                    </div>
+                    <p className="sm:col-span-2 flex items-center justify-center gap-2 text-sm text-muted-foreground"><BadgeCheck className="h-4 w-4 text-primary" /> Inscription individuelle, informations traitées pour l&apos;organisation de la session.</p>
+                </div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

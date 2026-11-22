@@ -28,7 +28,7 @@ const DomainsSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 md:gap-6">
           {domains.map((domain, index) => (
             <motion.div
               key={domain.name}
@@ -36,12 +36,12 @@ const DomainsSection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
-              className="group rounded-2xl border border-border bg-card p-6 text-center transition-all hover:border-secondary/40 hover:glow-secondary cursor-default"
+              className="group cursor-default rounded-2xl border border-border bg-card p-4 text-center transition-all hover:border-secondary/40 hover:glow-secondary sm:p-6"
             >
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-secondary/10">
-                <domain.icon className="h-7 w-7 text-secondary" />
+              <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-secondary/10 sm:mb-4 sm:h-14 sm:w-14">
+                <domain.icon className="h-5 w-5 text-secondary sm:h-7 sm:w-7" />
               </div>
-              <h3 className="font-heading text-sm font-bold text-foreground mb-1">{domain.name}</h3>
+              <h3 className="mb-1 font-heading text-xs font-bold text-foreground sm:text-sm">{domain.name}</h3>
               <p className="text-xs text-muted-foreground">{domain.description}</p>
             </motion.div>
           ))}

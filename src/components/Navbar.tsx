@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, BookOpen, Menu, X } from "lucide-react";
+import { CalendarDays, Menu, X } from "lucide-react";
 import logoRobotech from "@/assets/logo-robotech.png";
 
 const navLinks = [
   { id: "about", label: "À propos" },
-  { id: "domains", label: "Domaines" },
-  { id: "stats", label: "Séance 1" },
   { id: "register", label: "S'inscrire" },
+  { id: "domains", label: "Domaines" },
+  { id: "edition-2025", label: "Édition 2025" },
   { id: "downloads", label: "Téléchargements" },
-  { id: "contact", label: "Contact", href: "https://loukili-mohameding.netlify.app/#contact", external: true },
+  { id: "faq", label: "FAQ" },
 ];
 
 const Navbar = () => {
@@ -47,12 +47,12 @@ const Navbar = () => {
         initial={{ y: -80 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 backdrop-blur-xl bg-background/80"
+        className="fixed top-0 left-0 right-0 z-50 border-b border-border/60 bg-background/75 shadow-[0_12px_35px_-30px_black] backdrop-blur-xl"
       >
-        <div className="container mx-auto flex items-center justify-between py-3 px-4">
+        <div className="container mx-auto flex items-center justify-between py-3 px-4 sm:py-4">
           <div className="flex items-center gap-3">
-            <img src={logoRobotech} alt="Robotech Logo" className="h-10 w-10 object-contain" />
-            <span className="font-heading text-lg font-bold tracking-wider text-foreground">
+            <img src={logoRobotech} alt="Robotech Logo" className="h-9 w-9 object-contain sm:h-10 sm:w-10" />
+            <span className="font-heading text-base font-bold tracking-wider text-foreground sm:text-lg">
               ROBO<span className="text-primary">TECH</span>
             </span>
           </div>
@@ -76,25 +76,18 @@ const Navbar = () => {
 
           <div className="hidden lg:flex items-center gap-2">
             <a
-              href="#downloads"
+              href="#register"
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 glow-primary"
             >
-              <Download className="h-4 w-4" />
-              <span>Télécharger</span>
-            </a>
-            <a
-              href="#downloads"
-              className="inline-flex items-center gap-2 rounded-lg border border-secondary bg-secondary/10 px-4 py-2 text-sm font-semibold text-secondary transition-all hover:bg-secondary/20"
-            >
-              <BookOpen className="h-4 w-4" />
-              <span>Guide</span>
+              <CalendarDays className="h-4 w-4" />
+              <span>S&apos;inscrire</span>
             </a>
           </div>
 
           {/* Hamburger Menu Toggle (Mobile) */}
           <button
             onClick={toggleMenu}
-            className="lg:hidden p-2 text-foreground focus:outline-none"
+            className="lg:hidden flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card/70 text-foreground"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -110,9 +103,9 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 lg:hidden bg-background/95 backdrop-blur-md pt-20 px-4 pb-6 overflow-y-auto"
+            className="fixed inset-0 z-40 overflow-y-auto bg-background/95 px-5 pb-6 pt-24 backdrop-blur-xl"
           >
-            <div className="flex flex-col gap-6 text-base font-medium text-foreground">
+            <div className="mx-auto flex max-w-md flex-col gap-2 text-lg font-medium text-foreground">
               {navLinks.map((link) => (
                 <a
                   key={link.id}
@@ -120,31 +113,23 @@ const Navbar = () => {
                   target={link.external ? "_blank" : undefined}
                   rel={link.external ? "noopener noreferrer" : undefined}
                   onClick={toggleMenu}
-                  className={`py-2 border-b border-border/50 transition-colors ${activeSection === link.id
+                  className={`rounded-xl border border-transparent px-4 py-3.5 transition-colors ${activeSection === link.id
                     ? "text-primary font-bold"
-                    : "hover:text-primary"
+                    : "hover:border-border hover:bg-card hover:text-primary"
                     }`}
                 >
                   {link.label}
                 </a>
               ))}
 
-              <div className="flex flex-col sm:flex-row gap-3 mt-4">
+              <div className="mt-5 flex flex-col gap-3">
                 <a
-                  href="#downloads"
+                  href="#register"
                   onClick={toggleMenu}
-                  className="flex-1 inline-flex justify-center items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 glow-primary"
+                  className="inline-flex min-h-14 items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-base font-bold text-primary-foreground transition-all hover:opacity-90 glow-primary"
                 >
-                  <Download className="h-4 w-4" />
-                  <span>Télécharger</span>
-                </a>
-                <a
-                  href="#downloads"
-                  onClick={toggleMenu}
-                  className="flex-1 inline-flex justify-center items-center gap-2 rounded-xl border border-secondary bg-secondary/10 px-6 py-3 text-sm font-semibold text-secondary transition-all hover:bg-secondary/20"
-                >
-                  <BookOpen className="h-4 w-4" />
-                  <span>Guide</span>
+                  <CalendarDays className="h-4 w-4" />
+                  <span>S&apos;inscrire</span>
                 </a>
               </div>
             </div>
