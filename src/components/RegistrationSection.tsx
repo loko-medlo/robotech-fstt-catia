@@ -1,10 +1,13 @@
 import { motion } from "framer-motion";
 import { BadgeCheck, CreditCard, UsersRound } from "lucide-react";
 import { RegistrationForm } from "./RegistrationForm";
+import catiaEngine from "@/assets/assemblage motor.jpg";
 
 const RegistrationSection = () => {
     return (
-        <section id="register" className="py-24 bg-surface-elevated relative overflow-hidden">
+        <section id="register" className="relative overflow-hidden bg-surface-elevated py-24">
+            <img src={catiaEngine} alt="" className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.26] sm:object-right sm:opacity-[0.45]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-surface-elevated/88 via-surface-elevated/80 to-surface-elevated/90 sm:bg-gradient-to-r sm:from-surface-elevated sm:via-surface-elevated/78 sm:to-surface-elevated/35" />
             {/* Decorative blobs */}
             <div className="absolute top-1/4 left-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl -translate-x-1/2 pointer-events-none" />
             <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl translate-x-1/2 pointer-events-none" />

@@ -4,6 +4,7 @@ import imgAssemblage from "@/assets/assemblage motor.jpg";
 import imgPieceMeca from "@/assets/piece meca complexe.jpg";
 import imgEngrenages from "@/assets/système d'engrenages.gif";
 import imgAero from "@/assets/Structure Aéronautique.webp";
+import catiaMotorcycle from "@/assets/catia 3.jpg";
 const galleryItems = [
     {
         id: 1,
@@ -41,8 +42,10 @@ const galleryItems = [
 
 const GallerySection = () => {
     return (
-        <section id="gallery" className="py-24 bg-surface relative overflow-hidden">
-            <div className="container mx-auto px-4">
+        <section id="gallery" className="relative overflow-hidden bg-surface py-24">
+            <img src={catiaMotorcycle} alt="" className="absolute inset-0 h-full w-full object-cover object-right opacity-[0.16] sm:opacity-[0.28]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/75 to-background/95 sm:bg-gradient-to-r sm:from-background sm:via-background/78 sm:to-background/45" />
+            <div className="container relative z-10 mx-auto px-4">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}

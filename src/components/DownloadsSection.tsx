@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Download, BookOpen, FileText, ArrowUpRight, CheckCircle2, Laptop } from "lucide-react";
+import catiaBlueprint from "@/assets/catia 4.jpg";
 
 const downloads = [
   {
@@ -36,10 +37,12 @@ const downloads = [
 
 const DownloadsSection = () => {
   return (
-    <section id="downloads" className="py-24 bg-surface-elevated relative overflow-hidden">
+    <section id="downloads" className="relative overflow-hidden bg-background py-24">
+      <img src={catiaBlueprint} alt="" className="absolute inset-0 h-full w-full object-cover object-left opacity-[0.16] sm:opacity-[0.26]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/82 to-background/95 sm:bg-gradient-to-r sm:from-background sm:via-background/82 sm:to-background/55" />
       <div className="absolute inset-0 bg-grid opacity-[0.07]" />
       <div className="absolute -right-32 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container relative z-10 mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

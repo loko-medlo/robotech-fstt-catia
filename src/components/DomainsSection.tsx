@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Plane, Car, Cog, Building2, Stethoscope, Ship } from "lucide-react";
+import catiaAircraft from "@/assets/Structure Aéronautique.webp";
 
 const domains = [
   { icon: Plane, name: "Aérospatiale", description: "Airbus, Boeing, Dassault Aviation" },
@@ -12,8 +13,10 @@ const domains = [
 
 const DomainsSection = () => {
   return (
-    <section id="domains" className="py-24 bg-surface-elevated relative">
-      <div className="container mx-auto px-4">
+    <section id="domains" className="relative overflow-hidden bg-surface-elevated py-24">
+      <img src={catiaAircraft} alt="" className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.12] sm:object-right sm:opacity-[0.24]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-surface-elevated via-surface-elevated/90 to-surface-elevated sm:bg-gradient-to-r sm:from-surface-elevated sm:via-surface-elevated/85 sm:to-surface-elevated/45" />
+      <div className="container relative z-10 mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

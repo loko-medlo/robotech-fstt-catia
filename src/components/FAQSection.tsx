@@ -5,6 +5,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
+import catiaBlueprint from "@/assets/catia 4.jpg";
 
 const faqs = [
     {
@@ -27,7 +28,9 @@ const faqs = [
 
 const FAQSection = () => {
     return (
-        <section id="faq" className="py-24 bg-background relative overflow-hidden">
+        <section id="faq" className="relative overflow-hidden bg-background py-24">
+            <img src={catiaBlueprint} alt="" className="absolute inset-0 h-full w-full object-cover object-right opacity-[0.14] sm:opacity-[0.23]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/80 to-background sm:bg-gradient-to-r sm:from-background/85 sm:via-background/75 sm:to-background/95" />
             <div className="container mx-auto px-4 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

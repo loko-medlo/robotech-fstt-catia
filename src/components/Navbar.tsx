@@ -15,12 +15,15 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   useEffect(() => {
     const handleScroll = () => {
       const sections = navLinks.map(link => link.id);
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0);
       let current = "";
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -49,6 +52,13 @@ const Navbar = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="fixed top-0 left-0 right-0 z-50 border-b border-border/60 bg-background/75 shadow-[0_12px_35px_-30px_black] backdrop-blur-xl"
       >
+        <div className="absolute inset-x-0 top-0 h-px bg-border/60">
+          <motion.div
+            className="h-full origin-left bg-gradient-to-r from-primary via-primary to-secondary"
+            animate={{ scaleX: scrollProgress / 100 }}
+            transition={{ duration: 0.12, ease: "linear" }}
+          />
+        </div>
         <div className="container mx-auto flex items-center justify-between py-3 px-4 sm:py-4">
           <div className="flex items-center gap-3">
             <img src={logoRobotech} alt="Robotech Logo" className="h-9 w-9 object-contain sm:h-10 sm:w-10" />
